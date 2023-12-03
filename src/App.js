@@ -1,25 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [joke, setJoke] = useState('');
+
+    const handleClick = () => {
+        fetch('https://api.chucknorris.io/jokes/random').then(
+            (response) => {
+                if (!response.ok) {
+                    throw new Error(`Erro ao buscar piada: ${response.status}`);
+                }
+
+                response.json().then((jsonResult) => {
+                    setJoke(jsonResult.value);
+                })
+            }
+        )
+
+    }
+
+    return (
+        <div className="App">
+            <div>
+                <button className="Button" onClick={handleClick}>Contar piada</button>
+            </div>
+            <div>
+                {joke}
+            </div>
+        </div>
+    );
 }
 
 export default App;

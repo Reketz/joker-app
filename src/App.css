@@ -1,5 +1,16 @@
 .App {
+  display: flex;
+  height: 200px;
+  font-size: 38px;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  flex-direction: column;
+}
+
+.Button {
+  padding: 12px;
+  font-size: 30px;
 }
 
 .App-logo {
